@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+class <%= name.classify -%> < ApplicationRecord
+  module <%= @module_name %>
+    extend ActiveSupport::Concern
+  end
+end

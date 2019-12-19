@@ -1,27 +1,33 @@
-require_relative 'lib/concerns/version'
+# frozen_string_literal: true
 
-Gem::Specification.new do |spec|
-  spec.authors     = ['Martin Streicher']
-  spec.description = %q{TODO: Write a longer description or delete this line.}
-  spec.email       = ['martin.streicher@gadget.consulting']
-  spec.homepage    = 'https://github.com/gadgetonline/concerns'
-  spec.license     = 'MIT'
-  spec.name        = 'concerns'
-  spec.summary     = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.version     = Concerns::VERSION
+require_relative 'lib/concerns'
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
+Gem::Specification.new do |gem|
+  gem.add_dependency 'rails', '>= 6.0'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rubocop', '>= 0.78'
+  gem.add_development_dependency 'rubocop-ordered_methods'
 
-  spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'TODO: Put your gem\'s public repo URL here.'
-  spec.metadata['changelog_uri'] = "TODO: Put your gem's CHANGELOG.md URL here."
+  gem.authors     = ['Martin Streicher']
+  gem.bindir      = 'exe'
+  gem.description = 'A Rails generator to subdivide models into small files, usable with Zeitwerk'
+  gem.email       = ['martin.streicher@gadget.consulting']
+  gem.executables = gem.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+  # Specify what files should be added to the gem when it is released
+  # The `git ls-files -z` loads the files in the RubyGem that have been added to git
+  gem.files = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+
+  gem.homepage                    = 'https://github.com/gadgetonline/concerns'
+  gem.license                     = 'MIT'
+  gem.metadata['changelog_uri']   = 'https://github.com/gadgetonline/concerns/blob/master/CHANGELOG.md'
+  gem.metadata['homepage_uri']    = gem.homepage
+  gem.metadata['source_code_uri'] = 'https://github.com/gadgetonline/concerns'
+  gem.name                        = 'concerns'
+  gem.require_paths               = ['lib']
+  gem.required_ruby_version       = Gem::Requirement.new('>= 2.3.0')
+  gem.summary                     = 'A Rails generator to make modular models'
+  gem.version                     = Concerns::VERSION
 end
